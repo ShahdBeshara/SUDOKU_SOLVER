@@ -1,64 +1,6 @@
 import copy
 import numpy as np
 
-all_subset = []
-
-
-def subset_sum(arr, sum):
-    """
-    Given a list of integers 'arr' and an integer 'sum', this method should return a list of all the
-    subsets of 'arr' that add up to 'sum'.
-    """
-    possible_subset = []
-    all_subset.clear()
-    subset_sum_help(arr, sum, possible_subset)
-    return all_subset
-
-
-def subset_sum_help(arr, sum, subset):
-    if sum == 0:
-        if subset not in all_subset:
-            copy_subset = copy.deepcopy(subset)
-            all_subset.append(copy_subset)
-        return
-    if sum < 0:
-        return
-    for i, num in enumerate(arr):
-        subset.append(num)
-        # sorted the subset in order to prevent duplicated subsets
-        sorted_subset = copy.copy(subset)
-        sorted_subset.sort()
-        new_arr = arr[:i] + arr[i + 1:]
-        subset_sum_help(new_arr, sum - num, sorted_subset)
-        subset.pop()
-    return
-
-
-def partition_equal_subset_sum(arr):
-    """
-    Given a list of integers 'arr', this method should return True if 'arr' can be partitioned into 
-    two subsets such that the sum of elements in both subsets is equal, otherwise return False.
-    """
-    sub_arr = []
-    return partition_equal_subset_sum_help(arr, sub_arr)
-
-
-def partition_equal_subset_sum_help(arr, sub_arr):
-    if sum(arr) == sum(sub_arr):
-        return True
-    if len(arr) == 0:
-        return
-    for i, num in enumerate(arr):
-        sub_arr.append(num)
-        new_arr = arr[:i] + arr[i + 1:]
-        result = partition_equal_subset_sum_help(new_arr, sub_arr)
-        if result:
-            return True
-        sub_arr.pop()
-    return False
-
-
-
 def sudoku_solver(board):
     """
     Given a 2D list 'board' representing a Sudoku puzzle, this method should return True if the puzzle 
